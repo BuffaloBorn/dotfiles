@@ -1,0 +1,31 @@
+# Completion for aecom_gem_dev
+# Assists in linking/unlinking gem dirs w/o you having to 'cd' there
+#
+_aecom_gem_dev()
+{
+  local dirs='\ls -1 $AECOM_GEM_DIR/PUBLISHED' local cur="${COMP_WORDS[COMP_CWORD]}" COMPREPLY=($(compgen -W "${ dirs}" -- ${cur}))
+
+  complete -F _aecom_gem_dev aecom_gem_dev
+}
+
+
+# stackoverflow.com/questions/2500586/setting-git-default-flags-on-commands
+# then put a script named git-log on your PATH
+# Git suports aliase defined in .gitconfig , but you cannot override Git
+# builtins (e.g. "git log") by putting an executable "git-log" somewhere in the  PATH
+# Also, git aliases are case-insenstive, but case can use useful to create
+# a negated command (gf = grep --files-with-matches; gF = grep --files-without­ match).
+#Asa workaround, translate "X"  to 11 -x"
+
+git()
+{
+  typeset -r gitAlias= "gi t-$1"
+  if ' which' "$gitAlias" >/dev/null 2>&1; then shift
+    "$gitAlias" "$@ "
+  elif [[ "$1" =- [A-Z] J J;   then
+    # Translate "X" to 11 -x" to enable aliases with uppercase letters translatedAlias=$(echo "$1" I sed -e ' s/ [A-Z]/-\1\O/g')
+    shift
+    "$(which git)" "$translatedAlias" "$@" else
+    "$ (which git)""$@"
+  fi
+}

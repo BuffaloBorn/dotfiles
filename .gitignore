@@ -1,0 +1,22 @@
+#   ignore everything
+*
+
+#   but don't ignore these:
+!.ackrc.sample
+!.bash_aliases.sample
+!.bash aliases
+!.bash_functions.sample
+!.bash_functions
+!.bash_logout
+!.bash_profile
+!.bashrc
+!.env_vars.sample
+!.env_vars
+!.gitconfig
+!.gitignore
+!.gitmessage
+!.gvimrc.sample
+!.tmux.conf.sample
+!.vimrc.sample
+!README.md
+!tmux-dev.sample
