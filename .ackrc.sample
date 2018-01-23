@@ -1,0 +1,33 @@
+[user]
+# name =
+# email =
+[alias]
+ b = branch
+ bm = branch --merged
+ f = fetch
+ s = status
+ d = diff --color
+ dc = diff -cached --color
+ g = grep --color
+ l = log --abbrev-commit --color --decorate --graph --format=format"%Cgreen %h %Creset %s %Cred %ae"
+ l2 = log --abbrev-commit --color --decorate --graph 
+ lg = log --abbrev-commit --color --decorate --graph --pretty=oneline
+ lp = log --abbrev-commit --color --decorate --pretty=oneline
+ ci = commit
+ cp = cherry-pick
+ co = checkout
+ rc = rebase --continue
+ rh = reset --hard HEAD
+ rs = rebase -i HEAD~2
+ sp = stash pop
+[core]
+ excludesfile = ~/.gitignore_global
+ editor = vim
+[color]
+ ui = auto
+[commit]
+ template = ~/.gitmessage
+[color "diff"]
+ meta = blue black ul
+[diff]
+ tool = vimdiff
