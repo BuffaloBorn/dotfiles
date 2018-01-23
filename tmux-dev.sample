@@ -1,0 +1,24 @@
+tmux has-session -t development
+
+if	[ $? != 0 ]
+then
+  tmux new-session -s development -n editor -d
+  tmux send-keys -t development 'cd -/acme' C-m
+  tmux send-keys -t development 'vim'  C-m
+  tmux split-window -v -t development
+  tmux select-layout -t development main-horizontal
+  tmux send-keys -t development:1.2 'cd -/acme;be guard' C-m
+  tmux new-window -n '*nix console' -t  development
+  tmux send-keys -t development:2 'cd -/acme' c -m
+  tmux new-window -n rails_console -t  development
+  tmux send-keys -t development:3 'cd -/acme;be rails console' C-m
+  tmux new-window - n rails_server -t development
+  tmux send-keys -t development :4 'cd -/acme;rs' C-m
+  tmux new-window -n jasmine -t  development
+  tmux send-keys -t development:5 'cd -/acme;bundle exec rake jasmine' C-m
+  tmux new-window -n notes -t  development
+  tmux send-keys -t development:6 'cd -/notes;vim' C-m
+  tmux select-window  -t development:l
+fi
+
+tmux attach -t development
