@@ -1,9 +1,9 @@
 #   ignore everything
-*
+:w":w`
 
 #   but don't ignore these:
 !.ackrc.sample
-!/scripts/*
+! /scripts
 !.bash_aliases.sample
 !.bash_aliases
 !.bash_functions.sample

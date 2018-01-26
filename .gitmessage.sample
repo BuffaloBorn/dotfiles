@@ -1,0 +1,14 @@
+ACME-xxx SO-character subject  line
+
+[ACME-xxx](https://jira.devops.cia/browse/ACME-xxx) Why:
+*
+
+This change addresses the need by:
+
+*
+#  SO-character subject line
+#
+#  72-character wrapped longer description
+#
+#      See  https://robots.thoughtbot.com/better-commit-messages-with-a-gitmessage-template
+#
