@@ -3,8 +3,9 @@
 
 #   but don't ignore these:
 !.ackrc.sample
+!/scripts/*
 !.bash_aliases.sample
-!.bash aliases
+!.bash_aliases
 !.bash_functions.sample
 !.bash_functions
 !.bash_logout

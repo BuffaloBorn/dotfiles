@@ -21,7 +21,7 @@ fi
 
 PS1='[\u@\h \W$(_git_psl " (%s)")] \$ '
 
-source $HOME/project/acme/scripts/gi-tcompletion.sh
+source $HOME/git/scripts/git-completion.sh
 
 #  test if the windows/putty pageant program is serving your ssh key through
 #   agent forwarding or if ssh-agent on linux should be tried .
@@ -29,7 +29,7 @@ ssh -oStrictHostKeyChecking=no -oBatchMode=yes localhost echo&> /dev/null
 
 case $? in
   255*) #  ssh to localhost failed with 'permission denied' so no agent is running
-  source  /project/acme/scripts/ssh-agent-setup.sh
+  #source  /project/acme/scripts/ssh-agent-setup.sh
       ;;
     *)
       ;;
