@@ -25,11 +25,11 @@ fi
 
 # User specific aliases and functions export EXCLUDE SLOW SPECS=true
 # Put personal env vars such as $AECOM_GEM_DIR, GIT COMMITTER NAME and GIT COMMITTER EMAIL in -/.env_vars
-if [ -e -/.env_vars ]; then
+if [ -e ~/.env_vars ]; then
   . ~/.env_vars
 else
   echo
-  echo "you MUST create and customize the -/.env_vars file from .env_vars.sample for yourself."
+  echo "you MUST create and customize the ~/.env_vars file from .env_vars.sample for yourself."
   echo
   echo
   # don't exit here. It closes the window.
