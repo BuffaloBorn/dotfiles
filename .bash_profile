@@ -21,7 +21,7 @@ fi
 
 PS1='[\u@\h \W$(_git_psl " (%s)")] \$ '
 
-source $HOME/git/scripts/git-completion.sh
+source $HOME/git/scripts/dotfiles/git-completion.sh
 
 #  test if the windows/putty pageant program is serving your ssh key through
 #   agent forwarding or if ssh-agent on linux should be tried .
