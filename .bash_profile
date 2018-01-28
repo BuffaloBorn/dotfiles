@@ -19,7 +19,7 @@ fi
 
 # Include the Git branch name in your prompt
 
-PS1='[\u@\h \W$(_git_psl " (%s)")] \$ '
+PS1='[\u@\h \W$(__git_ps1 " (%s)")] \$ '
 
 source $HOME/git/dotfiles/scripts/git-completion.sh
 
