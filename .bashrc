@@ -10,13 +10,13 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 #if [ -f ~/.bash_functions ];     then
-#. ~/.bash_functions
+ . ~/.bash_functions
 #fi
 
 # This sets $PATH, $ACME, oracle, etc. - everything needed to work on ACME.
-if [ -f /project/ acme/scripts/acme-sh ared-env.sh ]; then
-  . /project/acme/scripts/acme-shared-env.sh
-fi
+#if [ -f /project/ acme/scripts/acme-sh ared-env.sh ]; then
+#  . /project/acme/scripts/acme-shared-env.sh
+#fi
 
 # This sets $PATH, $ACME, oracle, etc. - everything needed to work on ACME for FidOS.
 #if [ -f $HOME/project/acme/scripts/acme-shared-env.sh ];       then
