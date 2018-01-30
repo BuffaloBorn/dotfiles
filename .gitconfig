@@ -1,13 +1,17 @@
 [user]
-  name = BuffaloBorn
+  name = carl-mcgruder
   email = carl.mcgruder@gmail.com
 [alias]
   aa = add --all
+  ad = !git add -A && git diff --cached
+  ap = commit --amend -C HEAD
   b = branch
   # No color, short messages
   basic = log --pretty='%h %s'
+  bd = !sh -c 'git branch -D $1 && git push origin :$1' -
   bm = branch --merged
   bselect = !git branch | grep -v '^*' | fzf-tmux --reverse | xargs git checkout
+  c = commit -v -S
   ca = commit --amend --verbose
   car = commit --amend --no-edit
   ci = commit
@@ -16,14 +20,16 @@
   # Check out a pull request by number: g co-pr 123
   co-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
   conflicted = !vim +Conflicted
+  contrib = !sh -c 'git log $1 --pretty=format:%an | sort | uniq' -
+  com = checkout master
   copysha = !git rev-parse HEAD | pbcopy
   d = diff --color
   dc = diff -cached --color
   dcw = !git dc -w
   # Delete branch locally and remotely. Used by `git mm`
-  bd = !sh -c 'git branch -D $1 && git push origin :$1' -
   df = "!f() { [ \"$GIT_PREFIX\" != \"\" ] && cd "$GIT_PREFIX"; git diff --color $@ | diff-so-fancy | less --tabs=4 -RFX; }; f"
   dfw = !git df -w
+  dic = diff --cached
   f = fetch
   fall = fetch --all
   # Full commit messages without all the junk from `log --pretty=full`
@@ -31,6 +37,7 @@
   g = grep --color
   gg = grep --extended-regexp --break --heading --line-number
   glog = log -E -i --grep
+  ignore-date = rebase origin/master --ignore-date
   l = log --abbrev-commit --color --decorate --graph --format=format"%Cgreen %h %Creset %s %Cred %ae"
   l2 = log --abbrev-commit --color --decorate --graph
   lg = log --abbrev-commit --color --decorate --graph --pretty=oneline
@@ -38,14 +45,18 @@
   # Merge current branch into master, only if it's a fast-forward. Doesn't check
   # out master if it's not a FF merge.
   mm = !test `git rev-parse master` = $(git merge-base HEAD master) && git checkout master && git merge HEAD@{1} && git push && git bd $(git rev-parse --abbrev-ref @{-1}) || echo "Non-fastforward"
+  #mm = !git checkout master && git merge @{-1}
   mup = !git checkout master && git fetch origin && echo && git sl master..origin/master && echo && git pull --quiet && git checkout -
   newauthor = commit --amend --reset-author -C HEAD
   next = !git add . && git rebase --continue
+  pending = !git fetch origin && git fetch production && git log --reverse production/master..origin/master
   pl = pull
   ps = push
   pr = !git push -u && hub pull-request
   r = rebase -i origin/master
-  rbc = rebase --continue
+  rbc = !git rebase --continue && git status
+  rbi = !git fetch origin && git rebase -i origin/master
+  ready = !git fetch origin && git rebase --interactive origin/master && git rebase origin/master --ignore-date && git push -f && git mm && git push
   rc = rebase --continue
   rh = reset --hard HEAD
   riu = !git rebase -i $(git rev-parse --abbrev-ref --symbolic-full-name @{u})
@@ -66,6 +77,8 @@
   up = !git fetch origin && git rebase origin/master
   upstream = rev-parse --abbrev-ref --symbolic-full-name @{u}
   ureset = !git reset --hard $(git upstream)
+  unwip = !test "`git log -n1 --pretty=format:%s`" = "wip" && git reset HEAD~1
+  wip = !git add -A && git commit -m "wip"
 [core]
   #excludesfile = ~/.gitignore_global
   excludesfile = ~/.gitignore
