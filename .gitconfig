@@ -79,6 +79,12 @@
   ureset = !git reset --hard $(git upstream)
   unwip = !test "`git log -n1 --pretty=format:%s`" = "wip" && git reset HEAD~1
   wip = !git add -A && git commit -m "wip"
+  # Below are steps to clone all the branches in a remote repo
+  # mkdir <new cloned repo>
+  # cd <new cloned repo>
+  # git clone --mirror https://github.com/thoughtbot/upcase.git .git
+  # git config --bool core.bare false
+  # git reset --hard
 [core]
   #excludesfile = ~/.gitignore_global
   excludesfile = ~/.gitignore
