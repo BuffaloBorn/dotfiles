@@ -24,7 +24,7 @@
   com = checkout master
   copysha = !git rev-parse HEAD | pbcopy
   d = diff --color
-  dc = diff -cached --color
+  dc = diff --cached --color
   dcw = !git dc -w
   # Delete branch locally and remotely. Used by `git mm`
   df = "!f() { [ \"$GIT_PREFIX\" != \"\" ] && cd "$GIT_PREFIX"; git diff --color $@ | diff-so-fancy | less --tabs=4 -RFX; }; f"
@@ -125,7 +125,8 @@
   default = simple
   #default = upstream
 [merge]
-  ff = only
+#  will not allow for git merge --squash operations
+#  ff = only
 [fetch]
   prune = true
 [format]
