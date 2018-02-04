@@ -16,10 +16,14 @@ alias ls=' \ls -F'
 alias ll='ls -al'
 alias lr='ls -R'
 alias lt='ls -rot'
-alias lh='ls -lhS'
+alias lh='ls -lahS'
 alias rs='bundle exec rails server --port=$ RAILS_SERVER_PORT'
 alias rc='bundle exec rails console'
 alias ps='ps xf'
 
 #  This is useful for the deploy script
 alias fakecommit="echo foo >> foo.rb && git add foo.rb && git ci -m 'squash! fake commit so we can deploy'"
+
+alias gpd="git push origin develop"
+alias gpm="git push origin master" 
+alias gitar="git ls-files -d -m -o -z --excludestandard | xargs -0 git update-index --add --remove"
