@@ -3,17 +3,20 @@
   email = carl.mcgruder@gmail.com
 [alias]
   aa = add --all
+  ac = commit -a -m
   ad = !git add -A && git diff --cached
   ap = commit --amend -C HEAD
   b = branch
   # No color, short messages
   basic = log --pretty='%h %s'
+  #Delete branch locally and remotely. Used by `git mm`
   bd = !sh -c 'git branch -D $1 && git push origin :$1' -
   bm = branch --merged
   bselect = !git branch | grep -v '^*' | fzf-tmux --reverse | xargs git checkout
   c = commit -v -S
   ca = commit --amend --verbose
   car = commit --amend --no-edit
+  cav = commit --amend --verbose
   ci = commit
   cp = cherry-pick
   co = checkout
@@ -26,22 +29,31 @@
   d = diff --color
   dc = diff --cached --color
   dcw = !git dc -w
-  # Delete branch locally and remotely. Used by `git mm`
+  # -- Need More Details --#
   df = "!f() { [ \"$GIT_PREFIX\" != \"\" ] && cd "$GIT_PREFIX"; git diff --color $@ | diff-so-fancy | less --tabs=4 -RFX; }; f"
   dfw = !git df -w
   dic = diff --cached
+  d = diff --color
+  dc = diff --cached --color
   f = fetch
   fall = fetch --all
   # Full commit messages without all the junk from `log --pretty=full`
   full = log -1 --pretty='%C(red)%H%nAuthor: %C(green)%an%n%C(magenta)%s%n%b'
   g = grep --color
   gg = grep --extended-regexp --break --heading --line-number
+  gwc = grep --color
+  gebhl = grep --extended-regexp --break --heading --line-number
   glog = log -E -i --grep
   ignore-date = rebase origin/master --ignore-date
   l = log --abbrev-commit --color --decorate --graph --format=format"%Cgreen %h %Creset %s %Cred %ae"
+  lb = log --pretty='%h %s'
   l2 = log --abbrev-commit --color --decorate --graph
+  #Full commit messages without all the junk from `log --pretty=full`
+  lf = log -l --pretty= '%C(red) %H %nAuthor: %C(green)%an%n%C(magenta)%s%n%b'
   lg = log --abbrev-commit --color --decorate --graph --pretty=oneline
   lp = log --abbrev-commit --color --decorate --pretty=oneline
+  lstat = log --name-status --online
+  last = log -1 HEAD
   # Merge current branch into master, only if it's a fast-forward. Doesn't check
   # out master if it's not a FF merge.
   mm = !test `git rev-parse master` = $(git merge-base HEAD master) && git checkout master && git merge HEAD@{1} && git push && git bd $(git rev-parse --abbrev-ref @{-1}) || echo "Non-fastforward"
@@ -63,14 +75,16 @@
   rid = !git rebase -i $(git merge-base develop HEAD)
   rim = !git rebase -i $(git merge-base master HEAD)
   rmup = !git mup && git rebase master
-  rs = rebase -i HEAD~2
+  rs = rebase -i HEAD~2  
   s = status
+  sb = status -sb
   sl = log --oneline --decorate -20
   sla = log --oneline --decorate --graph --all -20
   slp = log --oneline --decorate
   slap = log --oneline --decorate --graph --all
   st = status -sb
   sp = stash pop
+  su = stash -u
   todo = !git log --format=%B -n 1 | grep -A999 '^This change$'
   uncommit = reset --soft HEAD^
   unstage = reset HEAD
@@ -79,16 +93,9 @@
   ureset = !git reset --hard $(git upstream)
   unwip = !test "`git log -n1 --pretty=format:%s`" = "wip" && git reset HEAD~1
   wip = !git add -A && git commit -m "wip"
-  # Below are steps to clone all the branches in a remote repo
-  # mkdir <new cloned repo>
-  # cd <new cloned repo>
-  # git clone --mirror https://github.com/thoughtbot/upcase.git .git
-  # git config --bool core.bare false
-  # git reset --hard
 [core]
   #excludesfile = ~/.gitignore_global
   excludesfile = ~/.gitignore
-  autocrlf = input
   editor = vim
 [color]
   # Color everything.
@@ -122,8 +129,9 @@
 [diff]
   tool = vimdiff
 [push]
-  default = simple
-  #default = upstream
+  # Push current branch (and ONLY current branch) even if you're never pushed it 
+  # before
+  default = tracking
 [merge]
 #  will not allow for git merge --squash operations
 #  ff = only
@@ -141,3 +149,7 @@
   gitcommand = hub
   nogreeting = true
   prompt = "\n%D %c(%b%#)%w ➜"
+[grep]
+# http://travisjeffery.com/b/2012/02/search-a-git-repo-like-a-ninja/
+extendRegexp = true
+lineNnmber = true
