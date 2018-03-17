@@ -12,8 +12,13 @@ g() {
 # compdef g=git
 
 # Make directory and change into it.
-function med(){
+function mcd(){
   mkdir -p "$1" && cd "$1";
+}
+
+# Find file without seeing 'Permission denied' on console
+function findFromRoot(){
+  find / -name "$1" 2>&1 | grep -v "Permission denied"
 }
 
 # Change file extensions recursively in current directory
@@ -46,3 +51,20 @@ function cdf(){
 #    du $arg .[A.]*./*;
 #  fi;
 #}
+
+# Create a mirror from git repo
+# need more work to make it more generic 
+# more check with inputs
+function mgr(){
+  if [ -d "$1" ]; then
+    rm -rf "$1"
+    mcd "$1"
+    git clone --mirror "$2" .git
+    git config --bool core.bare false
+    git reset --hard
+    git remote add "$3" "$2" 
+    git push "$2" --all
+   else
+    echo "$1 - repo is not currently tracked locally !!!"
+  fi
+}
