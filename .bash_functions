@@ -30,6 +30,42 @@ function findFromRoot(){
 #  end
 #}
 
+# Change working directory and then list that new directory contents
+function cdl() { 
+  cd "$@"; ls; 
+}
+
+# Define a command to cd then print the resulting directory.
+# I do this to avoid putting the current directory in my prompt.
+# alias cd=’cdir’
+function cdir ()
+{
+  cd “$*”
+  pwd
+}
+
+# e.g., up -> go up 1 directory
+# up 4 -> go up 4 directories
+up()
+{
+    dir=""
+    if [[ $1 =~ ^[0-9]+$ ]]; then
+        x=0
+        while [ $x -lt ${1:-1} ]; do
+            dir=${dir}../
+            x=$(($x+1))
+        done
+    else
+         dir=..
+    fi
+    cd "$dir";
+}
+
+# List files in order of ascending size (the second form takes a file-pattern argument):
+
+function lsdu() { ls -l $* | sort --key=5.1 -n; };
+function lsduf() { ls -l | egrep $* | sort --key=5.1 -n; };
+
 # Change working directory to the top-most Finder window  location
 #
 # Need to get the MATE version instead
@@ -67,4 +103,11 @@ function mgr(){
    else
     echo "$1 - repo is not currently tracked locally !!!"
   fi
+}
+
+# Add to .bashrc or .profile and type: “bu filename.txt”
+# I made this a long time ago and use it daily. If you really want to stay on top of your 
+# backed up files, you can keep a log by adding something like:
+function bu() { 
+  cp $@ $@.backup-`date +%y%m%d`; echo "`date +%Y-%m-%d` backed up $PWD/$@" >> ~/.backups.log; 
 }
