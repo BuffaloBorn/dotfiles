@@ -6,6 +6,7 @@
   ac = commit -a -m
   ad = !git add -A && git diff --cached
   ap = commit --amend -C HEAD
+  am = merge --abort
   b = branch
   # No color, short messages
   basic = log --pretty='%h %s'
