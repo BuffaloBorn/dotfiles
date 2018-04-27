@@ -115,3 +115,17 @@ $ export HISTFILESIZE=0
 ### Pattern matching with globs
 
 ### Pattern matching with extended globs
+
+#### Check to see if the ```extglob``` is enabled by issuing the following and make sure that ```extglob``` is set ```on```
+```bash
+$ shopt
+```
+
+#### If ```extglob``` is set ```off```; we can turn back on by issuing the following
+```bash
+
+$ shopt -s extglob
+```
+
+####Extended Globs
+ 
