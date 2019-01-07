@@ -79,6 +79,7 @@
   rs = rebase -i HEAD~2  
   s = status
   sb = status -sb
+  scom = show --stat --oneline HEAD
   sl = log --oneline --decorate -20
   sla = log --oneline --decorate --graph --all -20
   slp = log --oneline --decorate
