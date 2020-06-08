@@ -18,8 +18,10 @@
  co = checkout
  rc = rebase --continue
  rh = reset --hard HEAD
+ rsh1 = reset --soft HEAD~1
  rs = rebase -i HEAD~2
  sp = stash pop
+ restore = restore --source=HEAD^ --staged  --
 [core]
  excludesfile = ~/.gitignore_global
  editor = vim
